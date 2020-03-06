@@ -1,0 +1,1 @@
+ALTER TABLE venda ADD COLUMN mesa_id BIGINT;
