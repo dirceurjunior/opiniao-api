@@ -96,7 +96,7 @@ public class Venda implements Serializable {
 		return this.getValorTotalSemDesconto();
 	}
 
-	@JsonIgnore
+	// @JsonIgnore
 	public BigDecimal getValorTotal() {
 		BigDecimal valorTotal = BigDecimal.ZERO;
 		for (VendaItem item : this.getItens()) {

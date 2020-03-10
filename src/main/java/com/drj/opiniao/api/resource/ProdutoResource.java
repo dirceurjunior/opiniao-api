@@ -53,7 +53,7 @@ public class ProdutoResource {
 //	}
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PRODUTO') and #oauth2.hasScope('read')")
 	public Page<Produto> pesquisar(ProdutoFilter produtoFilter, Pageable pageable) {
 		return produtos.filtrar(produtoFilter, pageable);
 	}

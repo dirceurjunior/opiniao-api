@@ -49,9 +49,9 @@ public class VendaItem implements Serializable {
 //	@Column(name = "valor_tributacao_municipal", nullable = false, precision = 10, scale = 2)
 //	private BigDecimal valorTributacaoMunicipal = BigDecimal.ZERO;
 
+	// @JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "produto_id", nullable = false)
-	// @JsonIgnore
 	private Produto produto;
 
 	@JsonIgnore
@@ -80,7 +80,7 @@ public class VendaItem implements Serializable {
 		}
 	}
 
-	@JsonIgnore
+	// @JsonIgnore
 	@Transient
 	public BigDecimal getValorTotalSemDesconto() {
 		return this.getValorUnitarioSemDesconto().multiply(new BigDecimal(this.getQuantidade()));

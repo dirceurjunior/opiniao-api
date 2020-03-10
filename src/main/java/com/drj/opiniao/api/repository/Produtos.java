@@ -15,7 +15,4 @@ public interface Produtos extends JpaRepository<Produto, Long>, ProdutosQuery {
 
 	public List<Produto> findByCategoriaId(Long categoria);
 
-	// List<Produto> findByCategoria(@Param("categoria") @RequestParam("categoria")
-	// String categoria);
-
 }

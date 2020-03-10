@@ -27,6 +27,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.drj.opiniao.api.en.TipoAtivoInativo;
+import com.drj.opiniao.api.en.TipoSimNao;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
@@ -57,13 +58,54 @@ public class Produto implements Serializable {
 	@Column(columnDefinition = "text")
 	private String caracteristica;
 
-//	@Column(length = 50)
-//	private String referencia;
-
 	@NotNull
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
 	@Column(name = "data_cadastro", nullable = false)
 	private LocalDateTime dataCadastro = LocalDateTime.now();
+
+	@NotNull
+	@Column(name = "valor_unitario", precision = 10, scale = 2)
+	private BigDecimal valorUnitario;
+
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_situacao", nullable = false)
+	private TipoAtivoInativo situacao = TipoAtivoInativo.ATIVO;
+
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name = "ingrediente", nullable = false)
+	private TipoSimNao ingrediente = TipoSimNao.NAO;
+
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name = "adicional", nullable = false)
+	private TipoSimNao adicional = TipoSimNao.NAO;
+
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "categoria_id", nullable = false)
+	private Categoria categoria;
+
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "unidade_id", nullable = false)
+	private Unidade unidade;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "produto_ingrediente", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "ingrediente_id"))
+	private List<Produto> ingredientes;
+
+//	@ManyToMany
+//	@JoinTable(name = "produto_ingredientes", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "ingrediente_id"))
+//	private List<Produto> produtoIngredientes;
+
+//	@ManyToMany
+//	@JoinTable(name = "produto_ingredientes", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "ingrediente_id"))
+//	private List<Produto> produtos;
+
+//	@Column(length = 50)
+//	private String referencia;
 
 //	@Column(name = "data_ultima_alteracao")
 //	private LocalDateTime dataUltimaAlteracao;
@@ -75,17 +117,8 @@ public class Produto implements Serializable {
 //	@Column(name = "data_ultima_venda")
 //	private LocalDateTime dataUltimaVenda;
 
-	@NotNull
-	@Column(name = "valor_unitario", precision = 10, scale = 2)
-	private BigDecimal valorUnitario;
-
 //	@Column(name = "ultimo_custo", precision = 10, scale = 2)
 //	private BigDecimal ultimoCusto;
-
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	@Column(name = "tipo_situacao", nullable = false)
-	private TipoAtivoInativo situacao = TipoAtivoInativo.ATIVO;
 
 //	@ManyToOne
 //	@JoinColumn(name = "marca_id")
@@ -114,20 +147,10 @@ public class Produto implements Serializable {
 //	@JoinColumn(name = "colaborador_ultima_alteracao_id")
 //	private Colaborador colaboradorUltimaAlteracao;
 
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "categoria_id", nullable = false)
-	private Categoria categoria;
-
 //	@NotNull
 //	@ManyToOne
 //	@JoinColumn(name = "ncm_id")
 //	private Ncm ncm;
-
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "unidade_id", nullable = false)
-	private Unidade unidade;
 
 //	@ManyToOne
 //	@JoinColumn(name = "fornecedor_id")
@@ -146,10 +169,6 @@ public class Produto implements Serializable {
 //	@Min(1)
 //	@Column(name = "quantidade_maxima", length = 5)
 //	private Integer quantidadeMaxima;
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "produto_ingrediente", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "ingrediente_id"))
-	private List<Ingrediente> ingredientes;
 
 //	@Transient
 //	public boolean isNovo() {

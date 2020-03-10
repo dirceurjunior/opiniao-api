@@ -46,14 +46,14 @@ public class UnidadeResource {
 	private MessageSource messageSource;
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PRODUTO') and #oauth2.hasScope('read')")
 	public Page<Unidade> pesquisar(@RequestParam(required = false, defaultValue = "") String descricao,
 			Pageable pageable) {
 		return unidades.findByDescricaoContainingIgnoreCaseOrderByDescricao(descricao, pageable);
 	}
 
 	@PostMapping
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_UNIDADE') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PRODUTO') and #oauth2.hasScope('write')")
 	public ResponseEntity<Unidade> criar(@Valid @RequestBody Unidade unidade, HttpServletResponse response) {
 		Unidade unidadeSalva = unidadeService.salvar(unidade);
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, unidadeSalva.getId()));
@@ -61,7 +61,7 @@ public class UnidadeResource {
 	}
 
 	@GetMapping("/{id}")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_UNIDADE') and #oauth2.hasScope('read')")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PRODUTO') and #oauth2.hasScope('read')")
 	public ResponseEntity buscarPeloCodigo(@PathVariable Long id) {
 		Optional unidade = this.unidades.findById(id);
 		return unidade.isPresent() ? ResponseEntity.ok(unidade.get()) : ResponseEntity.notFound().build();
@@ -69,13 +69,13 @@ public class UnidadeResource {
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PreAuthorize("hasAuthority('ROLE_REMOVER_UNIDADE') and #oauth2.hasScope('write')")
+	@PreAuthorize("hasAuthority('ROLE_REMOVER_PRODUTO') and #oauth2.hasScope('write')")
 	public void remover(@PathVariable Long id) {
 		unidades.deleteById(id);
 	}
 
 	@PutMapping("/{id}")
-	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO')")
+	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_PRODUTO')")
 	public ResponseEntity<Unidade> atualizar(@PathVariable Long id, @Valid @RequestBody Unidade unidade) {
 		try {
 			Unidade unidadeSalvo = unidadeService.atualizar(id, unidade);

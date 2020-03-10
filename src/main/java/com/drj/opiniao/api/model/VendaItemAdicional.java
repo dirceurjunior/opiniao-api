@@ -36,6 +36,10 @@ public class VendaItemAdicional implements Serializable {
 	private VendaItem vendaItem;
 
 	private Ingrediente ingrediente;
+	
+	@ManyToOne
+	@JoinColumn(name = "produto_id", nullable = false)
+	private Produto produto;
 
 	public BigDecimal getValorTotalAdicional() {
 		return this.getValorUnitario().multiply(new BigDecimal(this.getQuantidade()));
