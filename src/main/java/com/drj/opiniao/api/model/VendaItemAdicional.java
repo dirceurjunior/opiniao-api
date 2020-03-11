@@ -34,8 +34,6 @@ public class VendaItemAdicional implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "venda_item_id", nullable = false)
 	private VendaItem vendaItem;
-
-	private Ingrediente ingrediente;
 	
 	@ManyToOne
 	@JoinColumn(name = "produto_id", nullable = false)
