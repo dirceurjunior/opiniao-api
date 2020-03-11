@@ -5,7 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("opiniao")
 public class OpiniaoApiProperty {
 
-	private String originPermitida = "https://opiniao-api.herokuapp.com";
+	private String originPermitida = "http://localhost:4200";
+	
+	// private String originPermitida = "https://opiniao-api.herokuapp.com";
 
 	private final Seguranca seguranca = new Seguranca();
 
