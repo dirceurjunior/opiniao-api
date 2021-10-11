@@ -3,6 +3,7 @@ package com.drj.opiniao.api.resource;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.sound.midi.Soundbank;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,13 @@ public class ProdutoResource {
 	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PRODUTO') and #oauth2.hasScope('read')")
 	public Page<ResumoProduto> resumir(ProdutoFilter produtoFilter, Pageable pageable) {
 		return produtos.resumir(produtoFilter, pageable);
+	}
+	
+	@GetMapping("/adicional")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_PRODUTO') and #oauth2.hasScope('read')")
+	public Page<Produto> buscarAdicionais(ProdutoFilter produtoFilter, Pageable pageable) {
+		System.out.println("chegou aki");
+		return produtos.findByAdicionalTrue(produtoFilter, pageable);
 	}
 
 	@PostMapping

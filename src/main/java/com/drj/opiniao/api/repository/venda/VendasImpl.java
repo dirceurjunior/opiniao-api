@@ -51,18 +51,11 @@ public class VendasImpl implements VendasQuery {
 		CriteriaQuery<ResumoVenda> criteria = builder.createQuery(ResumoVenda.class);
 		Root<Venda> root = criteria.from(Venda.class);
 
-		criteria.select(builder.construct(ResumoVenda.class, 
-				root.get(id), 
-				root.get(Venda_.dataCriacao), 
-				root.get(Venda_.dataVenda),
-				root.get(Venda_.operacao), 
-				root.get(Venda_.cliente).get(Cliente_.NOME_RAZAO_SOCIAL),
-				root.get(Venda_.mesa).get(Mesa_.NUMERO),
-				root.get(Venda_.valorTotalComDesconto),
-				root.get(Venda_.valorTotalSemDesconto),
-				root.get(Venda_.tipoDesconto), 
-				root.get(Venda_.valorDescontoVenda),
-				root.get(Venda_.observacao),
+		criteria.select(builder.construct(ResumoVenda.class, root.get(id), root.get(Venda_.dataCriacao),
+				root.get(Venda_.dataVenda), root.get(Venda_.operacao),
+				root.get(Venda_.cliente).get(Cliente_.NOME_RAZAO_SOCIAL), root.get(Venda_.mesa).get(Mesa_.NUMERO),
+				root.get(Venda_.valorTotalComDesconto), root.get(Venda_.valorTotalSemDesconto),
+				root.get(Venda_.tipoDesconto), root.get(Venda_.valorDescontoVenda), root.get(Venda_.observacao),
 				root.get(Venda_.itens)));
 
 		Predicate[] predicates = criarRestricoes(vendaFilter, builder, root);
@@ -103,13 +96,11 @@ public class VendasImpl implements VendasQuery {
 //		}
 //
 		if (vendaFilter.getDataVendaDe() != null) {
-			predicates.add(
-					builder.greaterThanOrEqualTo(root.get(Venda_.DATA_VENDA), vendaFilter.getDataVendaDe()));
+			predicates.add(builder.greaterThanOrEqualTo(root.get(Venda_.DATA_VENDA), vendaFilter.getDataVendaDe()));
 		}
 
 		if (vendaFilter.getDataVendaAte() != null) {
-			predicates.add(
-					builder.lessThanOrEqualTo(root.get(Venda_.DATA_VENDA), vendaFilter.getDataVendaAte()));
+			predicates.add(builder.lessThanOrEqualTo(root.get(Venda_.DATA_VENDA), vendaFilter.getDataVendaAte()));
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);

@@ -49,3 +49,16 @@ INSERT INTO unidade (abreviacao, descricao) VALUES ('MT', 'METRO');
 INSERT INTO unidade (abreviacao, descricao) VALUES ('M2', 'METRO QUADRADO');
 INSERT INTO unidade (abreviacao, descricao) VALUES ('M3', 'METRO CUBICO');
 INSERT INTO unidade (abreviacao, descricao) VALUES ('KG', 'QUILOGRAMA');
+
+INSERT INTO public.categoria (id, descricao, categoria_pai_id) VALUES (1, 'LANCHES', NULL);
+INSERT INTO public.categoria (id, descricao, categoria_pai_id) VALUES (2, 'PIZZAS', NULL);
+INSERT INTO public.categoria (id, descricao, categoria_pai_id) VALUES (3, 'LANCHES ARTESANAIS', NULL);
+INSERT INTO public.categoria (id, descricao, categoria_pai_id) VALUES (4, 'REFRIGERANTES', NULL);
+INSERT INTO public.categoria (id, descricao, categoria_pai_id) VALUES (5, 'CERVEJAS', NULL);
+INSERT INTO public.categoria (id, descricao, categoria_pai_id) VALUES (6, 'INGREDIENTES', NULL);
+
+INSERT INTO public.mesa (id, numero) VALUES (1, 1);
+INSERT INTO public.mesa (id, numero) VALUES (2, 2);
+INSERT INTO public.mesa (id, numero) VALUES (3, 3);
+INSERT INTO public.mesa (id, numero) VALUES (4, 4);
+INSERT INTO public.mesa (id, numero) VALUES (5, 5);

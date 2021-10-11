@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -31,6 +33,7 @@ public class VendaItemAdicional implements Serializable {
 	@Column(name = "valor_unitario", precision = 10, scale = 2)
 	private BigDecimal valorUnitario = BigDecimal.ZERO;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "venda_item_id", nullable = false)
 	private VendaItem vendaItem;

@@ -82,6 +82,7 @@ public class VendaService {
 		// venda.setColaborador(usuarioLogado.getUsuario().getColaborador());
 
 		System.out.println(" 1 venda " + venda);
+		//venda.setItens(itens);
 		recalcularVenda(venda);
 		return vendas.save(this.venda);
 	}

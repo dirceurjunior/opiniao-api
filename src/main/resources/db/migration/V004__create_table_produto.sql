@@ -5,7 +5,7 @@ CREATE TABLE produto (
     caracteristica VARCHAR(200),
 	data_cadastro timestamp without time zone NOT NULL,
 	valor_unitario DECIMAL(10,2) NOT NULL,	
-	tipo_situacao VARCHAR(20) NOT NULL,
+	situacao VARCHAR(20) NOT NULL,
 	ingrediente VARCHAR(20) NOT NULL,
 	adicional VARCHAR(20) NOT NULL,
 	categoria_id BIGINT NOT NULL,

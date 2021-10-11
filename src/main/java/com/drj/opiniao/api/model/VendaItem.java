@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -59,18 +60,13 @@ public class VendaItem implements Serializable {
 	private Produto produto;
 
 	@JsonIgnore
-	// @JsonManagedReference
 	@ManyToOne
-	@JoinColumn(name = "venda_id")
+	@JoinColumn(name = "venda_id", nullable = false)
 	private Venda venda;
 	
-	@OneToMany(targetEntity = VendaItemAdicional.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "venda_item_id")
+	@OneToMany(targetEntity = VendaItemAdicional.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "venda_item_id", referencedColumnName = "id")
 	private List<VendaItemAdicional> adicionais = new ArrayList<>();
-
-	// @ManyToOne
-	// @JoinColumn(name = "venda_id", nullable = false)
-	// private Venda venda;
 
 //	@ManyToOne
 //	@JoinColumn(name = "colaborador_id", nullable = false)

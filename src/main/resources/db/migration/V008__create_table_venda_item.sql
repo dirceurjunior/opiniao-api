@@ -7,7 +7,7 @@ CREATE TABLE venda_item (
 	valor_unitario_com_desconto DECIMAL(10,2),
 			
 	produto_id BIGINT NOT NULL,
-	venda_id BIGINT NOT NULL,
+	venda_id BIGINT,
 	
 	CONSTRAINT pk_venda_item PRIMARY KEY (id),
 	CONSTRAINT fk_produto FOREIGN KEY (produto_id) REFERENCES produto (id),

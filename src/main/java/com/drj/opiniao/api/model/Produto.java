@@ -69,7 +69,7 @@ public class Produto implements Serializable {
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	@Column(name = "tipo_situacao", nullable = false)
+	@Column(name = "situacao", nullable = false)
 	private TipoAtivoInativo situacao = TipoAtivoInativo.ATIVO;
 
 	@NotNull

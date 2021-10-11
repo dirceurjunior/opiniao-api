@@ -98,8 +98,19 @@ public class ProdutosImpl implements ProdutosQuery {
 		if (produtoFilter.getCategoria() != null) {
 			predicates.add(builder.equal(root.get(Produto_.CATEGORIA), produtoFilter.getCategoria()));
 		}
+		
+		if (produtoFilter.getAdicional() != null) {
+			predicates.add(builder.equal(root.get(Produto_.ADICIONAL), produtoFilter.getAdicional()));
+		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);
+	}
+
+	@Override
+	public Page<Produto> findByAdicionalTrue(ProdutoFilter produtoFilter, Pageable pageable) {
+		// TODO Auto-generated method stub
+		System.out.println("chegou aki também");
+		return null;//findByAdicionalTrue(produtoFilter, pageable);
 	}
 
 }

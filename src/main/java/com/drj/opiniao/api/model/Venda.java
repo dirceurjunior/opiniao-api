@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +20,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.drj.opiniao.api.en.TipoDesconto;
 import com.drj.opiniao.api.en.TipoOperacao;
@@ -83,9 +87,8 @@ public class Venda implements Serializable {
 	@Column(columnDefinition = "text")
 	private String observacao;
 
-	@OneToMany(targetEntity = VendaItem.class, cascade = CascadeType.ALL)
-	// @Fetch(FetchMode.SUBSELECT)
-	@JoinColumn(name = "venda_id")
+	@OneToMany(targetEntity = VendaItem.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "venda_id", referencedColumnName = "id")
 	private List<VendaItem> itens = new ArrayList<>();
 
 	// @Column(name = "cpf_nfp", length = 20)
